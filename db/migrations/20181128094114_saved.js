@@ -1,18 +1,17 @@
 exports.up = function(knex, Promise) {
-  return knex.schema.createTable('comments', (table) => {
+  return knex.schema.createTable('saved', (table) => {
     table.increments();
-    table.text('comment');
-    table.integer('strain_id')
+    table.string('saved_recipe_url');
+    table.integer('user_id')
      .notNullable()
      .references('id')
-     .inTable('saved')
+     .inTable('users')
      .onDelete('CASCADE')
      .index();
     table.timestamps(true, true);
   })
-
 };
 
 exports.down = function(knex, Promise) {
-  return knex.schema.dropTable('comments')
+  return knex.schema.dropTable('saved')
 };

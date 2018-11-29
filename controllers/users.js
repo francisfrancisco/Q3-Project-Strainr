@@ -2,8 +2,7 @@ const knex = require("../db/knex.js");
 
 module.exports = {
   index: (req, res) => {
-    knex("users")
-      .then(results => {
+    knex("users").then(results => {
         res.json(results);
       })
       .catch(err => console.log(err));
@@ -17,38 +16,30 @@ module.exports = {
       .catch(err => console.log(err));
   },
   create: (req, res) => {
-    let { username, password, full_name } = req.body;
+    let { user_name, password, email } = req.body;
+    console.log(req.body);
     knex("users")
       .insert({
-        username,
+        user_name,
         password,
-        full_name
-      })
-      .then(() => {
-        res.sendStatus(200);
+        email
+      }, '*')
+      .then(newUser => {
+        res.json(newUser);
       })
       .catch(err => console.log(err));
   },
   update: (req, res) => {
-    let { username, password, full_name } = req.body;
+    let { user_name, password, email } = req.body;
     knex("users")
       .where("id", req.params.id)
       .update({
-        username,
+        user_name,
         password,
-        full_name
+        email
       })
-      .then(() => {
-        res.sendStatus(200);
-      })
-      .catch(err => console.log(err));
-  },
-  delete: (req, res) => {
-    knex("users")
-      .where("id", req.params.id)
-      .del()
-      .then(() => {
-        res.sendStatus(200);
+      .then(updatedUser => {
+        res.json(updatedUser);
       })
       .catch(err => console.log(err));
   }
