@@ -4,7 +4,7 @@ const comments = require("../controllers/comments.js");
 
 module.exports = function(app) {
   // USERS
-  app.get('/', users.index)//complete
+  app.get('/api/user/:id', users.index)//complete
   app.post("/api/register", users.create);//complete
   // app.post("/api/users/:id", users.update);
   // app.post("/api/users/delete/:id", users.delete);

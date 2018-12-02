@@ -8,6 +8,12 @@ exports.up = function(knex, Promise) {
      .inTable('saved')
      .onDelete('CASCADE')
      .index();
+     table.integer('user_id')
+      .notNullable()
+      .references('id')
+      .inTable('users')
+      .onDelete('CASCADE')
+      .index();
     table.timestamps(true, true);
   })
 

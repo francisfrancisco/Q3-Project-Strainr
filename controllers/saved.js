@@ -4,9 +4,11 @@ module.exports = {
   create: (req,res) => {
     knex('saved').where('user_id', req.params.id).insert({
         saved_recipe_url: req.body.saved_recipe_url,
+        saved_recipe_name: req.body.saved_recipe_name,
+        time: req.body.time,
         user_id: req.params.id
-      }, '*').then(newComment => {
-        res.sendStatus(200).json(newComment)
+      }, '*').then(newSaved => {
+        res.json(newSaved)
       })
       .catch(err => console.log(err))
   },

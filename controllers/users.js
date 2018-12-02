@@ -2,7 +2,8 @@ const knex = require("../db/knex.js");
 
 module.exports = {
   index: (req, res) => {
-    knex("users").then(results => {
+    knex("users").where("id", req.params.id)
+      .then(results => {
         res.json(results);
       })
       .catch(err => console.log(err));
